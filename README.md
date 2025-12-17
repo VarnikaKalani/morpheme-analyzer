@@ -1,27 +1,83 @@
-# Interactive Morpheme Analyzer
+# Word Analyzer
 
-An educational web application for learning morphology through interactive word analysis.
+An interactive educational web application for learning **morphology** and **phonology** through real-time word analysis. Students can explore how words are built from meaningful parts (morphemes) and see their phonetic transcriptions in IPA notation.
 
 ## Features
 
-- **Visual Morpheme Breakdown**: Color-coded morphemes (roots in green, prefixes in blue, suffixes in red)
+### Morphology Analysis
+- **Visual Morpheme Breakdown**: Color-coded morphemes with smooth animations
+  - Roots in green gradient
+  - Prefixes in blue gradient
+  - Suffixes in orange/red gradient
 - **Educational Labels**: Shows whether morphemes are free/bound and inflectional/derivational
-- **Interactive Interface**: Type any word and see it broken down instantly
-- **Example Words**: Pre-loaded examples demonstrating different morphological structures
 - **Comprehensive Explanations**: Each morpheme includes meaning and grammatical information
+- **Interactive Interface**: Type any word and see it broken down instantly
+
+### Phonology Analysis
+- **IPA Transcription**: Displays International Phonetic Alphabet notation for words
+- **Syllable Count**: Automatically calculates number of syllables from phonetic data
+- **Prominent Display**: Large, gradient-styled phonetic transcription for easy reading
+- **Smart Fallback**: When full word phonetics aren't available, attempts to fetch root word phonetics
+
+### User Interface
+- **Modern Design**: Gradient backgrounds, smooth animations, and glassmorphism effects
+- **Responsive Layout**: Works on desktop, tablet, and mobile devices
+- **Example Words**: Pre-loaded examples demonstrating different morphological structures
+- **Hover Effects**: Interactive elements with scale and rotation animations
 
 ## What Students Learn
 
+### Morphology Concepts
 1. **Morpheme Types**: Understanding roots, prefixes, and suffixes
 2. **Free vs. Bound Morphemes**: Identifying which morphemes can stand alone
 3. **Inflectional vs. Derivational**: Distinguishing grammatical markers from word-forming affixes
 4. **Word Structure**: How complex words are built from smaller meaningful units
 
-## Technology
+### Phonology Concepts
+1. **IPA Notation**: Reading International Phonetic Alphabet transcriptions
+2. **Syllable Structure**: Understanding how words are divided into syllables
+3. **Pronunciation Patterns**: Connecting spelling to sound
 
-- **Next.js 14**: React framework for web applications
-- **Tailwind CSS**: Utility-first CSS framework for styling
-- **Vercel**: Deployment platform
+## Known Limitations
+
+### IPA Phonetics Availability Issue
+
+**Problem**: Some words display "Phonetic data not available" instead of showing IPA transcription.
+
+**Why This Happens**:
+The app uses the [Free Dictionary API](https://dictionaryapi.dev/) to fetch phonetic transcriptions. However, this API has incomplete coverage for certain types of words:
+
+1. **Morphologically Complex Words**: Words with multiple affixes (e.g., "unbreakable", "misunderstanding") often don't have dedicated dictionary entries
+2. **Inflected Forms**: Some inflected variants (e.g., "running", "prettier", "books") may not be in the database
+3. **Compound Words**: Multi-morpheme compounds may lack phonetic data
+4. **Rare or Specialized Words**: Less common words may not be included in the free database
+5. **Very New Words**: Recently coined terms may not yet be in the dictionary
+
+**Current Solution**:
+When the app can't find phonetics for the full word, it automatically:
+1. Attempts to fetch the phonetic transcription for just the root morpheme
+2. Displays the root phonetics with a "(from root word)" label
+3. Shows a helpful message explaining why data might be unavailable
+
+**Example**:
+- "happiness" → Shows full IPA transcription ✓
+- "unbreakable" → May show "break" root phonetics as fallback
+- "misunderstanding" → May show "Phonetic data not available"
+
+**Future Improvements**:
+To provide complete phonetic coverage, the app could be enhanced with:
+- Integration with additional phonetic databases
+- Client-side phonetic generation using rule-based algorithms
+- Manual phonetic transcriptions for common complex words
+- Text-to-phoneme conversion libraries
+
+## Technology Stack
+
+- **Next.js 14**: React framework for server-side rendering and routing
+- **React 18**: Component-based UI library
+- **Tailwind CSS 3**: Utility-first CSS framework for styling
+- **Free Dictionary API**: External API for phonetic transcriptions
+- **Custom CSS Animations**: Smooth transitions and interactive effects
 
 ## Local Development
 
@@ -35,6 +91,8 @@ npm run dev
 # Open http://localhost:3000
 ```
 
+The development server will start at `http://localhost:3000` with hot-reload enabled.
+
 ## Deployment to Vercel
 
 1. Push this code to a GitHub repository
@@ -47,24 +105,78 @@ Done! Your app will be live in ~30 seconds.
 
 ## Educational Context
 
-This project was created for **LX 250: Introduction to Linguistics** as an extra credit assignment to teach morphology concepts to future students.
+This project was created for **LX 250: Introduction to Linguistics** to help students understand:
 
-### Key Concepts Demonstrated:
-
+### Morphology Concepts:
 - **Morphemes**: The smallest meaningful units in language
 - **Roots**: Core meaning-bearing morphemes (often free)
 - **Affixes**: Bound morphemes that attach to roots (prefixes and suffixes)
 - **Inflectional Morphology**: Grammatical modifications (e.g., -ed for past tense, -s for plural)
 - **Derivational Morphology**: Word-formation processes that create new words or change part of speech
 
+### Phonology Concepts:
+- **IPA Notation**: Standard system for phonetic transcription
+- **Phonemes**: Distinct sound units in language
+- **Syllable Structure**: Organization of sounds within words
+
 ## Example Words Analyzed
 
-- **unbreakable**: un- (prefix) + break (root) + -able (suffix)
-- **rewriting**: re- (prefix) + write (root) + -ing (suffix)
-- **happiness**: happy (root) + -ness (suffix)
-- **teacher**: teach (root) + -er (suffix)
+### Morphology Breakdown:
+- **unbreakable**: un- (prefix, negative) + break (root) + -able (suffix, capability)
+- **rewriting**: re- (prefix, again) + write (root) + -ing (suffix, progressive)
+- **happiness**: happy (root) + -ness (suffix, state of being)
+- **teacher**: teach (root) + -er (suffix, agent)
+- **prettier**: pretty (root) + -er (suffix, comparative)
+
+### Phonology Display:
+Words with available IPA transcriptions show:
+- Full phonetic spelling in IPA format
+- Syllable count derived from phonetic markers
+- Original word spelling for comparison
+
+## How It Works
+
+### Morpheme Analysis Algorithm:
+1. Checks for known prefixes at the beginning of the word
+2. Checks for known suffixes at the end of the word
+3. Identifies the remaining portion as the root morpheme
+4. Classifies each morpheme by type and provides linguistic information
+
+### Phonetics Fetching Process:
+1. Sends word to Free Dictionary API
+2. Parses response for IPA transcription in multiple possible fields
+3. If unavailable, attempts to fetch root word phonetics
+4. Displays result with appropriate labeling and context
+
+## Project Structure
+
+```
+morpheme-analyzer/
+├── app/
+│   ├── page.js           # Main React component with analysis logic
+│   ├── layout.js         # Root layout wrapper
+│   └── globals.css       # Global styles and animations
+├── public/               # Static assets
+├── package.json          # Dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
+├── next.config.js        # Next.js configuration
+└── README.md            # This file
+```
+
+## Contributing
+
+Suggestions for improvements are welcome! Potential areas for enhancement:
+- Expanded morpheme database
+- Alternative phonetic data sources
+- Audio pronunciation features
+- Etymology information
+- Multiple language support
 
 ## Author
 
-Created by Varnika for LX 250 Extra Credit Assignment
+Created for LX 250: Introduction to Linguistics
 Boston University, Fall 2025
+
+## License
+
+Educational use only.
