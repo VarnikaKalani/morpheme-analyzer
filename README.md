@@ -1,3 +1,5 @@
+https://word-analyzer-beta.vercel.app/
+
 # Word Analyzer
 
 An interactive educational web application for learning **morphology** and **phonology** through real-time word analysis. Students can explore how words are built from meaningful parts (morphemes) and see their phonetic transcriptions in IPA notation.
@@ -93,46 +95,6 @@ npm run dev
 
 The development server will start at `http://localhost:3000` with hot-reload enabled.
 
-## Deployment to Vercel
-
-1. Push this code to a GitHub repository
-2. Go to [vercel.com](https://vercel.com)
-3. Click "Import Project"
-4. Select your GitHub repository
-5. Click "Deploy"
-
-Done! Your app will be live in ~30 seconds.
-
-## Educational Context
-
-This project was created for **LX 250: Introduction to Linguistics** to help students understand:
-
-### Morphology Concepts:
-- **Morphemes**: The smallest meaningful units in language
-- **Roots**: Core meaning-bearing morphemes (often free)
-- **Affixes**: Bound morphemes that attach to roots (prefixes and suffixes)
-- **Inflectional Morphology**: Grammatical modifications (e.g., -ed for past tense, -s for plural)
-- **Derivational Morphology**: Word-formation processes that create new words or change part of speech
-
-### Phonology Concepts:
-- **IPA Notation**: Standard system for phonetic transcription
-- **Phonemes**: Distinct sound units in language
-- **Syllable Structure**: Organization of sounds within words
-
-## Example Words Analyzed
-
-### Morphology Breakdown:
-- **unbreakable**: un- (prefix, negative) + break (root) + -able (suffix, capability)
-- **rewriting**: re- (prefix, again) + write (root) + -ing (suffix, progressive)
-- **happiness**: happy (root) + -ness (suffix, state of being)
-- **teacher**: teach (root) + -er (suffix, agent)
-- **prettier**: pretty (root) + -er (suffix, comparative)
-
-### Phonology Display:
-Words with available IPA transcriptions show:
-- Full phonetic spelling in IPA format
-- Syllable count derived from phonetic markers
-- Original word spelling for comparison
 
 ## How It Works
 
@@ -173,7 +135,7 @@ Suggestions for improvements are welcome! Potential areas for enhancement:
 - Multiple language support
 
 ## Author
-
+Varnika Kalani
 Created for LX 250: Introduction to Linguistics
 Boston University, Fall 2025
 
